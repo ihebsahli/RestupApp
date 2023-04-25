@@ -1,0 +1,49 @@
+.res {
+    margin: 0 auto;
+    margin-bottom: 2%;
+    padding: 20px;
+    max-width: 100%;
+    text-align: center;
+
+}
+.res .row{
+    display: flex;
+    justify-content: center;
+}
+
+.form-control{
+    font-size: small;
+
+}
+
+@media screen and (max-width: 576px) {
+    .res {
+        max-width: 100%;
+        padding: 10px;
+    }
+}
+
+.res label {
+    display: inline-block;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #333;
+    font-size: medium;
+}
+
+@media screen and (max-width: 576px) {
+    .res label {
+        font-size: 14px;
+    }
+}
+
+.titR {
+    margin-top: 2%;
+}
+
+.btnR{
+    text-align: center;
+    font-size: small;
+    max-width: 20%;
+    text-align: center;
+}

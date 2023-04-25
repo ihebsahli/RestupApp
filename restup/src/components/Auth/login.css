@@ -1,0 +1,67 @@
+.appBg{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    background: url('https://c0.wallpaperflare.com/preview/839/412/980/food-and-drink-pizza-pizzas-tomato.jpg');
+    background-size: cover;
+  }
+
+  .ant-form-item-label{
+    position: relative;
+  }
+  
+  
+
+  .loginForm{
+    background-color: rgba(255, 255, 255, 0,2);
+    box-shadow: 0px 8px 32px 0 rgba(0, 0, 255, 0,33);
+    backdrop-filter: blur(8px);
+    padding: 0px 16px 16px 16px;
+    border-radius: 16px;
+    width: 400px;
+  }
+  
+  .socialLogin{
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    color: white;
+    font-size: 24px;
+  }
+  
+  .socialIcon{
+    cursor: pointer;
+  }
+  
+  .divider {
+    border: none;
+    height: 1px;
+    background-color: #d9d9d9;
+    margin: 24px 0;
+    }
+
+    .ant-divider-inner-text{
+        color: white;
+        font-family: Georgia, 'Times New Roman', Times, serif;
+    }
+
+    .ant-typography.title.css-dev-only-do-not-override-1me4733{
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        font-size: 28px;
+
+    }
+
+
+    .ant-form-item-required{
+        color: #fff !important;
+    }
+    
+    .ant-form-item-required{
+      display: block !important;
+    }
+
+    /* .ant-form-item-control-input{
+        width: 400px;
+    } */

@@ -1,0 +1,24 @@
+/* Fixer la sidebar à gauche */
+.ant-menu-root {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  .ant-menu-inline {
+    flex: 1;
+  }
+  
+  /* Rendre la sidebar responsive */
+  @media (max-width: 576px) {
+    .ant-menu-root {
+      flex-direction: row;
+    }
+    .ant-menu-inline,
+    .ant-menu-vertical {
+      display: none;
+    }
+    .ant-menu-vertical-left {
+      display: block;
+      width: 100%;
+    }
+  }
