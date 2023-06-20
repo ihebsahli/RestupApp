@@ -19,7 +19,7 @@ const reducerHandler = (state, action, actionHandler) => {
                 isLoading: false,
                 loaded: true,
                 error: action.data,
-                data: [],
+                data: null,
             }
         default:
             return state;

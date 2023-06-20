@@ -5,25 +5,26 @@ export const API = {
 
     user: {
 
-        register: '/register',
-        
+        register: '/users/register',
+        login: '/auth',
+
     },
 
     menu: {
 
         listmenu: '/listmenu',
+        deletePlat : '/plats/deleteplat',
+        addPlat : '/plats/addplat',
         
     },
 
+    reservation: {
 
-    // plat: {
+        list: '/reservation/list',   
+        addreservation: '/reservation/addreservation',     
+        deletereservation: '/reservation/deletereservation',     
+    },
 
-    //     platsList: '/plats/allplats',
-    //     deleteReservation: '/DeleteReservation',
-    //     addReservation: '/addReservation',
-    //     updateReservation: '/EditReservation',
-        
-    // }
 
    
 }

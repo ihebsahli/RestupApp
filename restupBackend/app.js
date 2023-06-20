@@ -42,6 +42,9 @@ app.use('/recompences' , recompencesRouter);
 app.use('/users', require('./src/routes/users'));
 app.use('/auth', require('./src/routes/auth'));
 app.use('/panier', require('./src/routes/panier'));
+app.use('/reservation', require('./src/routes/reservation'));
+app.use('/admin', require('./src/routes/admin'));
+app.use('/authadmin', require('./src/routes/authAdmin'));
 
 
 app.listen(5000, () => {

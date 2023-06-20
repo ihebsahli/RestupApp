@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Button, Form, Input, Typography, message, Divider, Select } from 'antd';
-import { GoogleOutlined, FacebookFilled, TwitterOutlined } from '@ant-design/icons';
+import { Button, Form, Input, Typography, Divider, Select } from 'antd';
 import '../Auth/login.css'
 import { Link } from 'react-router-dom'; // import Link
 import { useNavigate } from "react-router-dom";
@@ -8,19 +7,6 @@ import { register } from "../../redux/actionCreator";
 import { useDispatch, useSelector } from "react-redux";
 
 export const Register = () => {
-
-  const login = () => {
-   
-    const form = document.querySelector('.loginForm');
-    const password = form.querySelector('input[name="myPassword"]').value;
-    const repeatPassword = form.querySelector('input[name="myRepeatPassword"]').value;
-    if (password !== repeatPassword) {
-      message.error('Passwords do not match');
-      return;
-    }
-    message.success('Login successful!')
-  }
-
    // check if password and repeat password fields match
    const registerState = useSelector(state => state.newReducer.register)
    const dispatch = useDispatch();
@@ -42,7 +28,6 @@ export const Register = () => {
       // redirect to the list of reservations page
     }
   };
-
   useEffect(() => {
     if (registerState.loaded && registerState.data);
   }, [registerState])
@@ -108,7 +93,7 @@ export const Register = () => {
         >
           <Select placeholder="Select your Role"
            value={role}
-           onChange={(e) => setRole(e.target.value)}>
+           onChange={(e) => setRole(e)}>
             <Select.Option value="Serveur">Serveur</Select.Option>
             <Select.Option value="Livreur">Livreur</Select.Option>
             <Select.Option value="Client">Client</Select.Option>
@@ -155,9 +140,6 @@ export const Register = () => {
         <Button type="primary" htmlType="submit" block onClick={handleAdduser}>Sign Up</Button>
         <Divider style={{ borderColor: "black" }}>Or Login with</Divider>
         <div className="socialLogin">
-          <GoogleOutlined className="socialIcon" onClick={login} style={{ color: "red" }} />
-          <FacebookFilled className="socialIcon" onClick={login} style={{ color: "blue" }} />
-          <TwitterOutlined className="socialIcon" onClick={login} style={{ color: "cyan" }} />
         </div>
         {/* Add the Link component */}
         <div className="registerLink">

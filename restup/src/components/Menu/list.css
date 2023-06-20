@@ -1,5 +1,13 @@
-.table.table-striped.table-dark{
+.table.table-striped.table-dark {
   margin-top: 5%;
   width: 60%;
   margin-left: 20%;
+}
+
+.search {
+  text-align: center;
+  align-items: center;
+  width: 800px;
+  font-size: small;
+
 }

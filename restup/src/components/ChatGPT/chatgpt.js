@@ -2,7 +2,7 @@ import { React, useState } from "react";
 import '../ChatGPT/chat.css'
 import '@chatscope/chat-ui-kit-styles/dist/default/styles.min.css';
 import { MainContainer, ChatContainer, MessageList, Message, MessageInput, TypingIndicator } from '@chatscope/chat-ui-kit-react';
-const API_KEY = "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";
+const API_KEY = "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";
 
 // "Explain things like you would to a 10 year old learning how to code."
 const systemMessage = {

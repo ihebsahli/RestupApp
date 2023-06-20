@@ -3,17 +3,18 @@ import { reducerHandler } from "./reducerHandler"
 
 // Actions and Types
 const getPlatsListAction = actionCreator('GET_PLATS_LIST_ACTION')
-const deleteReservationAction = actionCreator('DELETE_RESERVATION')
+const getReservationListAction = actionCreator('GET_RESERVATION_LIST_ACTION')
+const deletePlatAction = actionCreator('DELETE_PLAT')
 const registerAction = actionCreator('REGISTER_USER')
+const loginAction = actionCreator('LOGIN_USER')
 const getMenuListAction = actionCreator('GET_MENU')
 const addReservationAction = actionCreator('ADD_RESERVATION')
 const getHolidayRequestAction = actionCreator('GET_HOLIDAY_REQUEST')
 const getDemandHistoryAction = actionCreator('GET_DEMAND_HISTORY')
 const updateReservationAction = actionCreator('UPDATE_RESERVATION')
 const deleteUserAction = actionCreator('DELETE_USER')
-
-
-
+const deleteReservationAction = actionCreator('DELETE_RESERVATION')
+const addPlatAction = actionCreator('ADD_PLAT')
 // Initial State
 const initialAsyncState = {
     isLoading: false,
@@ -25,7 +26,7 @@ const initialAsyncState = {
 // Initial Reducer State
 const initialState = {
     PlatsList: initialAsyncState,
-    ReservationDeleting: initialAsyncState,
+    PlatDeleting: initialAsyncState,
     employeeProfile: initialAsyncState,
     addReservation: initialAsyncState,
     userRegistration: initialAsyncState,
@@ -34,13 +35,23 @@ const initialState = {
     updateReservation: initialAsyncState,
     register: initialAsyncState,
     menu: initialAsyncState,
-    userDeleting: initialAsyncState
-
+    userDeleting: initialAsyncState,
+    reservation: initialAsyncState,
+    deleteReservation: initialAsyncState,
+    login: initialAsyncState,
+    platAdded: initialAsyncState,
 }
 
 // Reducer
 const reducer = (state = initialState, action) => {
     switch (action.type) {
+        case loginAction.REQUEST:
+        case loginAction.SUCCESS:
+        case loginAction.FAILURE:
+            return {
+                ...state,
+                login: reducerHandler(state.login, action, loginAction)
+            }
         case deleteUserAction.REQUEST:
         case deleteUserAction.SUCCESS:
         case deleteUserAction.FAILURE:
@@ -55,12 +66,12 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 PlatsList: reducerHandler(state.PlatsList, action, getPlatsListAction)
             }
-        case deleteReservationAction.REQUEST:
-        case deleteReservationAction.SUCCESS:
-        case deleteReservationAction.FAILURE:
+        case deletePlatAction.REQUEST:
+        case deletePlatAction.SUCCESS:
+        case deletePlatAction.FAILURE:
             return {
                 ...state,
-                ReservationDeleting: reducerHandler(state.ReservationDeleting, action, deleteReservationAction)
+                PlatDeleting: reducerHandler(state.PlatDeleting, action, deletePlatAction)
             }
         case registerAction.REQUEST:
         case registerAction.SUCCESS:
@@ -68,6 +79,13 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 register: reducerHandler(state.register, action, registerAction)
+            }
+        case getReservationListAction.REQUEST:
+        case getReservationListAction.SUCCESS:
+        case getReservationListAction.FAILURE:
+            return {
+                ...state,
+                reservation: reducerHandler(state.reservation, action, getReservationListAction)
             }
         case getMenuListAction.REQUEST:
         case getMenuListAction.SUCCESS:
@@ -82,6 +100,13 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 addReservation: reducerHandler(state.addReservation, action, addReservationAction)
+            }
+        case addPlatAction.REQUEST:
+        case addPlatAction.SUCCESS:
+        case addPlatAction.FAILURE:
+            return {
+                ...state,
+                platAdded: reducerHandler(state.platAdded, action, addPlatAction)
             }
         case getHolidayRequestAction.REQUEST:
         case getHolidayRequestAction.SUCCESS:
@@ -104,9 +129,16 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 updateReservation: reducerHandler(state.updateReservation, action, updateReservationAction)
             }
+        case deleteReservationAction.REQUEST:
+        case deleteReservationAction.SUCCESS:
+        case deleteReservationAction.FAILURE:
+            return {
+                ...state,
+                deleteReservation: reducerHandler(state.deleteReservation, action, deleteReservationAction)
+            }
         default:
             return state
     }
 }
 export { reducer }
-export { getPlatsListAction, getMenuListAction, deleteReservationAction, getDemandHistoryAction, getHolidayRequestAction, addReservationAction, updateReservationAction, registerAction, deleteUserAction }
+export { addPlatAction ,loginAction, deleteReservationAction, getReservationListAction, getPlatsListAction, getMenuListAction, deletePlatAction, getDemandHistoryAction, getHolidayRequestAction, addReservationAction, updateReservationAction, registerAction, deleteUserAction }

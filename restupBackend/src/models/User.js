@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const roles = ['admin', 'client','livreur','serveur']; // liste des rôles possibles
+const roles = ['Admin', 'Client','Livreur','Serveur']; // liste des rôles possibles
 
 const UserSchema = new mongoose.Schema({
   email: {

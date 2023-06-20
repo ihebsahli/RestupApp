@@ -1,13 +1,33 @@
 import { API_HOST , API } from '../api/axios';
 import axios from 'axios';
 import {
-    deleteReservationAction , getDemandHistoryAction , getPlatsListAction,
+    addPlatAction,loginAction ,deleteReservationAction, deletePlatAction , getDemandHistoryAction , getPlatsListAction,getReservationListAction,
     getHolidayRequestAction , addReservationAction , updateReservationAction , registerAction , getMenuListAction , deleteUserAction
 } from './actions';
 // import actionsAlert from "../alert/actions"
 // const { alertSuccess, alertError } = actionsAlert;
 
 /* get employee list  */
+
+const login = (data) => {
+    const URL = API_HOST + API.user.login;
+    console.log(URL);
+    return async (dispatch) => {
+      dispatch(loginAction.request());
+      console.log(data);
+      axios.post(URL, data).then(
+        (res) => {
+          dispatch(loginAction.success(res.data));
+          // dispatch(alertSuccess({ msg: 'Connexion réussie', type: 'success' }));
+        },
+        (err) => {
+          dispatch(loginAction.failure(err));
+          console.log(err);
+          // dispatch(alertError({ msg: 'Echec de connexion', type: 'error' }));
+        }
+      );
+    };
+  };
 
 const getPlatsList = () => {
     const URL = API_HOST + API.plat.platsList ;
@@ -43,6 +63,21 @@ const getMenuList = () => {
     };
 };
 
+const getReservationList = () => {
+    const URL = API_HOST + API.reservation.list ;
+    return async dispatch => {
+        dispatch(getReservationListAction.request());
+        axios.get(URL).then(
+            (res) => {
+               dispatch(getReservationListAction.success(res.data));
+            },
+            (err) => {
+                dispatch(getReservationListAction.failure(err));
+                console.log(err);
+            }
+        )
+    };
+};
 
 const getHolidayRequest = () => {
     const URL = API_HOST + API.user.waitHolidayAuth
@@ -121,20 +156,23 @@ const updateReservation = (data) => {
 //     }
 // }
 
-const addReservation = (ref, nomClient, Date) => {
+const addReservation = (nomComplet, numeroTelephone, dateReservation,heureReservation , nombrePersonnes , numeroTable) => {
     const data = {
-        ref,
-        nomClient,
-        Date
+        nomComplet,
+        numeroTelephone,
+        dateReservation,
+        heureReservation,
+        nombrePersonnes,
+        numeroTable
     }
-    const URL = API_HOST + API.reservation.addReservation;
+    const URL = API_HOST + API.reservation.addreservation;
     return async dispatch => {
         dispatch(addReservationAction.request())
         axios.post(URL, data).then(
             (res) => {
                dispatch(addReservationAction.success(res))
                 // dispatch(alertSuccess({ msg: 'Employé ajouté avec succés', type: 'success' }));
-                 
+                //  dispatch(getReservationList());
             },
             (err) => {
                 dispatch(addReservationAction.failure(err))
@@ -145,16 +183,44 @@ const addReservation = (ref, nomClient, Date) => {
     }
 }
 
-const register = (firstname,lastname,email,  password,roles,phoneNumber) => {
+const addPlat = (nomPlat, description, disponibilite,tempsPreparation , prix , image) => {
+    const data = {
+        nomPlat,
+        description,
+        disponibilite,
+        tempsPreparation,
+        prix,
+        image
+    }
+    const URL = API_HOST + API.menu.addPlat;
+    return async dispatch => {
+        dispatch(addPlatAction.request())
+        axios.post(URL, data).then(
+            (res) => {
+               dispatch(addPlatAction.success(res))
+                // dispatch(alertSuccess({ msg: 'Employé ajouté avec succés', type: 'success' }));
+                //  dispatch(getReservationList());
+            },
+            (err) => {
+                dispatch(addPlatAction.failure(err))
+                console.log(err);
+                // dispatch(alertError({ msg: 'Echec d\'ajout d\'employé', type: 'error' }));
+            }
+        )
+    }
+}
+
+const register = (firstname,lastname,email,  role,password,phoneNumber) => {
     const data = {
         firstname,
         lastname,
         email,
+        role,
         password,
-        roles,
         phoneNumber
     }
     const URL = API_HOST + API.user.register;
+    console.log(URL);
     return async dispatch => {
         dispatch(registerAction.request())
         axios.post(URL, data).then(
@@ -207,14 +273,36 @@ const register = (firstname,lastname,email,  password,roles,phoneNumber) => {
 //     };
 // };
 /* edit editor */
+const deletePlat = (id) => {
+    const URL = API_HOST + API.menu.deletePlat + '/'+ id  ;
+    return async dispatch => {
+        dispatch(deletePlatAction.request())
+        axios.delete(URL).then(
+            (res) => {
+                dispatch(deletePlatAction.success(true))
+                // dispatch(getReservationList())
+                // dispatch(alertSuccess({ msg: 'Employé supprimé avec succés', type: 'success' }));
+                // setTimeout(() => {
+                //     history.push('/listReservation')
+                // }, 3000);
+            },
+            (err) => {
+                deletePlatAction.failure(err)
+                console.log(err);
+                // dispatch(alertError({ msg: 'Echec de supression d\'employé', type: 'error' }));
+            }
+        )
+    };
+};
+
 const deleteReservation = (id) => {
-    const URL = API_HOST + API.reservation.deleteReservation+ '/' + id  ;
+    const URL = API_HOST + API.reservation.deletereservation + '/'+ id  ;
     return async dispatch => {
         dispatch(deleteReservationAction.request())
         axios.delete(URL).then(
             (res) => {
                 dispatch(deleteReservationAction.success(true))
-                // dispatch(getReservationList())
+                dispatch(getReservationList())
                 // dispatch(alertSuccess({ msg: 'Employé supprimé avec succés', type: 'success' }));
                 // setTimeout(() => {
                 //     history.push('/listReservation')
@@ -251,4 +339,4 @@ const deleteUser = (id) => {
     };
 };
 
-export {  updateReservation, getHolidayRequest, getDemandHistory, getPlatsList, addReservation, deleteReservation, register , getMenuList ,deleteUser };
+export {  addPlat,login , deleteReservation, updateReservation, getHolidayRequest, getDemandHistory, getPlatsList, addReservation, deletePlat, register , getMenuList ,deleteUser , getReservationList };
